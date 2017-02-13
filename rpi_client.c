@@ -27,12 +27,6 @@ int main(int argc, char* argv[]){
 		return(FAILURE);
 	}
 
-	char address[sizeof argv[1]]; 
-	char port[sizeof argv[2]];
-
-	strcpy(address, argv[1]);
-	strcpy(port, argv[2]);
-
 	struct addrinfo details, *results;
 	
 	memset(&details, 0, sizeof details);
@@ -41,10 +35,10 @@ int main(int argc, char* argv[]){
 	details.ai_flags = AI_PASSIVE;
 
 	int status = 0;
-	if(status = getaddrinfo(argv[1], port, &details, &results) != 0){
+	if(status = getaddrinfo(argv[1], argv[2], &details, &results) != 0){
 		printf("getaddrinfo produced error\n");
 		printf("Reason: %s\n", gai_strerror(status));
-		printf("Port: %s, Address: %s\n", port, address);
+		printf("Port: %s, Address: %s\n", argv[2], argv[1]);
 		return(FAILURE);
 	}
 	
